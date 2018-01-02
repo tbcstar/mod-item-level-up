@@ -9,7 +9,7 @@
 uint32 max_lvl;
 uint32 Increase_Level;
 bool Level_item_enabled;
-std::vector<uint32> InvalidMap = { 489, 592, 30, 566, 607, 628, 562, 618, 617, 559, 572 };
+uint32 InvalidMap[11] = { 489, 592, 30, 566, 607, 628, 562, 618, 617, 559, 572 };
 
 class LevelItem : public ItemScript
 {
@@ -33,13 +33,12 @@ public:
             return false;
         }
 
-        for (int i = 0; i < InvalidMap.size(); ++i)
+        for (int i = 0; i < sizeof(InvalidMap); ++i)
             if (p->GetMapId() == InvalidMap[i])
                 return false; 
 
         uint8 newLevel = p->getLevel() + 1;
         p->GiveLevel(newLevel);
-        p->InitTalentForLevel();
         p->SetUInt32Value(PLAYER_XP, 0);
         p->DestroyItemCount(i->GetEntry(), 1, true);
         ChatHandler(p->GetSession()).PSendSysMessage("You have used one level coin");
