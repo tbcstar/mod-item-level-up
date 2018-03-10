@@ -10,4 +10,4 @@ elseif ( MINGW )
   )
 endif()
 
-install(FILES "${CMAKE_WHO_LOGGED_DIR}/conf/LevelItem.conf.dist" DESTINATION ${CONF_DIR})
+install(FILES "${CMAKE_LevelItem_DIR}/conf/LevelItem.conf.dist" DESTINATION ${CONF_DIR})
