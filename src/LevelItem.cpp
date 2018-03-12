@@ -1,4 +1,4 @@
-#include "Configuration/Config.h"
+﻿#include "Configuration/Config.h"
 #include "Player.h"
 #include "Creature.h"
 #include "AccountMgr.h"
@@ -9,7 +9,6 @@
 uint32 max_lvl;
 uint32 Increase_Level;
 bool Level_item_enabled;
-uint32 InvalidMap[11] = { 489, 592, 30, 566, 607, 628, 562, 618, 617, 559, 572 };
 
 class LevelItem : public ItemScript
 {
@@ -19,6 +18,9 @@ public:
     bool OnUse(Player* p, Item* i, const SpellCastTargets &) override
     {
         if (!Level_item_enabled)
+            return false;
+
+        if (p->GetMap()->IsBattlegroundOrArena())
             return false;
 
         if (p->IsInCombat() || p->IsInFlight())
@@ -32,10 +34,6 @@ public:
             ChatHandler(p->GetSession()).PSendSysMessage("You are already Max Level");
             return false;
         }
-
-        for (int i = 0; i < sizeof(InvalidMap); ++i)
-            if (p->GetMapId() == InvalidMap[i])
-                return false; 
 
         uint8 newLevel = p->getLevel() + 1;
         p->GiveLevel(newLevel);
@@ -55,7 +53,12 @@ public:
     void OnBeforeConfigLoad(bool reload) override
     {
         if (!reload) {
-            std::string cfg_file = "LevelItem.conf";
+            std::string conf_path = _CONF_DIR;
+            std::string cfg_file = conf_path + "/LevelItem.conf";
+
+#ifdef WIN32
+            cfg_file = "levelitem.conf";
+#endif
             std::string cfg_def_file = cfg_file + ".dist";
 
             sConfigMgr->LoadMore(cfg_def_file.c_str());
