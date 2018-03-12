@@ -20,10 +20,7 @@ public:
         if (!Level_item_enabled)
             return false;
 
-        if (p->GetMap()->IsBattlegroundOrArena())
-            return false;
-
-        if (p->IsInCombat() || p->IsInFlight())
+        if (p->IsInCombat() || p->IsInFlight() || p->GetMap()->IsBattlegroundOrArena())
         {
             ChatHandler(p->GetSession()).PSendSysMessage("You can not use this item right now");
             return false;
