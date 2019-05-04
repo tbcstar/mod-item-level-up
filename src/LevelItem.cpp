@@ -26,7 +26,7 @@ public:
             return false;
         }
 
-        if (p->getLevel() == max_lvl)
+        if (p->getLevel() >= max_lvl)
         {
             ChatHandler(p->GetSession()).PSendSysMessage("You are already Max Level");
             return false;
