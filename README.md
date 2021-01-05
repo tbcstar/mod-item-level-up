@@ -5,7 +5,7 @@
 #Module for Azerothcore
 Current features:
 
-*Creates an item that allows you to level up (id = 701001).
+*创建一个允许您升级的物品（id = 701001）。
 
 ## Requirements
 

@@ -13,7 +13,7 @@ LevelItem.Enable = 1
 LevelItem.Announce = 1
 
 #    Set item's max level
-#        Description: Max level the Item can be used up to
+#        描述:最大等级的物品可以使用到
 #        Default:     Enabled = 80                     
 
 LevelItem.MaxItemLevel = 80

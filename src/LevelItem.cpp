@@ -51,7 +51,7 @@ public:
     {
         if (sConfigMgr->GetBoolDefault("Arena1v1Announcer.Enable", true))
         {
-            ChatHandler(player->GetSession()).SendSysMessage("This server is running the |cff4CFF00Level Item |rmodule.");
+            ChatHandler(player->GetSession()).SendSysMessage("服务器已启用 |cff4CFF00物品升级 |r模块。");
         }
     }
 };
@@ -68,13 +68,13 @@ public:
 
         if (p->IsInCombat() || p->IsInFlight() || p->GetMap()->IsBattlegroundOrArena())
         {
-            ChatHandler(p->GetSession()).PSendSysMessage("You can't use that right now!");
+            ChatHandler(p->GetSession()).PSendSysMessage("你现在不能用那个!");
             return false;
         }
 
         if (p->getLevel() >= MaxItemLevel)
         {
-            ChatHandler(p->GetSession()).PSendSysMessage("You're already at level %u!", MaxItemLevel);
+            ChatHandler(p->GetSession()).PSendSysMessage("你已经达到等级%u了", MaxItemLevel);
             return false;
         }
 
@@ -82,7 +82,7 @@ public:
         p->GiveLevel(newLevel);
         p->SetUInt32Value(PLAYER_XP, 0);
         p->DestroyItemCount(i->GetEntry(), 1, true);
-        ChatHandler(p->GetSession()).PSendSysMessage("You have used one Level-Up Token!");
+        ChatHandler(p->GetSession()).PSendSysMessage("你已经使用了一个升级物品!");
 
         return true;
     }
